@@ -1,7 +1,7 @@
 // Nav.js
 import { Link } from 'react-router';
 
-const Nav = () => {
+export default function Nav() {
 	return (
 		<nav className="navbar">
 			<h1 className="navbar-brand">
@@ -22,5 +22,3 @@ const Nav = () => {
 		</nav>
 	);
 }
-
-export default Nav;

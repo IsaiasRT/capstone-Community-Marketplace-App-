@@ -10,7 +10,7 @@ const emptyForm = {
 	imageUrl: '',
 };
 
-const Seller = () => {
+export default function Seller() {
 	const [formData, setFormData] = useState(emptyForm);
 	const [message, setMessage] = useState('');
 
@@ -56,5 +56,3 @@ const Seller = () => {
 		</div>
 	);
 }
-
-export default Seller;
