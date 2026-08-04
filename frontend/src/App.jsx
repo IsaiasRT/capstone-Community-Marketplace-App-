@@ -1,18 +1,52 @@
+import { useState } from 'react'
 import { Routes, Route } from 'react-router'
 import Nav from './components/Nav.jsx'
 import ProductList from './components/ProductList.jsx'
 import Seller from './components/Seller.jsx'
 import MyListings from './components/MyListings.jsx'
+import Cart from './components/Cart.jsx'
 
 export default function App() {
+  const [cart, setCart] = useState([])
+
+  const addToCart = (product) => {
+    setCart((current) => {
+      const existing = current.find((item) => item.product._id === product._id)
+      if (existing) {
+        return current.map((item) =>
+          item.product._id === product._id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      }
+      return [...current, { product, quantity: 1 }]
+    })
+  }
+
+  const removeFromCart = (productId) => {
+    setCart((current) =>
+      current.filter((item) => item.product._id !== productId)
+    )
+  }
+
+  const clearCart = () => {
+    setCart([])
+  }
+
   return (
     <>
-      <Nav />
+      <Nav cartCount={cart.reduce((sum, item) => sum + item.quantity, 0)} />
       <main>
         <Routes>
-          <Route path="/" element={<ProductList />} />
+          <Route path="/" element={<ProductList onAddToCart={addToCart} />} />
           <Route path="/seller" element={<Seller />} />
           <Route path="/my-listings" element={<MyListings />} />
+          <Route
+            path="/cart"
+            element={
+              <Cart cart={cart} onRemove={removeFromCart} onClear={clearCart} />
+            }
+          />
         </Routes>
       </main>
     </>

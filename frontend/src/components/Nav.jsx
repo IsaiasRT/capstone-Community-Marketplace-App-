@@ -1,7 +1,7 @@
 // Nav.js
 import { Link } from 'react-router'
 
-export default function Nav() {
+export default function Nav({ cartCount }) {
 	return (
 		<nav className="navbar">
 			<h1 className="navbar-brand">
@@ -21,6 +21,11 @@ export default function Nav() {
 				<li className="nav-item">
 					<Link to="/my-listings" className="nav-link">
 						My Listings
+					</Link>
+				</li>
+				<li className="nav-item">
+					<Link to="/cart" className="nav-link">
+						Cart {cartCount > 0 && `(${cartCount})`}
 					</Link>
 				</li>
 			</ul>

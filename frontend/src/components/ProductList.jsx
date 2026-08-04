@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function ProductList() {
+export default function ProductList({ onAddToCart }) {
 	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
@@ -36,7 +36,7 @@ export default function ProductList() {
 						<p className="product-category">
 							Category: {product.category}
 						</p>
-						<button>Add to cart</button>
+						<button onClick={() => onAddToCart(product)}>Add to cart</button>
 					</div>
 				))}
 			</div>
