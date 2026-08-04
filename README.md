@@ -79,8 +79,14 @@ https://github.com/IsaiasRT
 ## 🚀 Getting Started
 
 ```bash
+**front end**
 npm install
 npm run dev
+
+**back-end**
+npm install
+node server.js
+
 ```
 
 ---
