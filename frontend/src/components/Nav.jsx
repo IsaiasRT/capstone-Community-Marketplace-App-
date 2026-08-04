@@ -1,5 +1,5 @@
 // Nav.js
-import { Link } from 'react-router';
+import { Link } from 'react-router'
 
 export default function Nav() {
 	return (
@@ -16,6 +16,11 @@ export default function Nav() {
 				<li className="nav-item">
 					<Link to="/seller" className="nav-link">
 						Become a Seller
+					</Link>
+				</li>
+				<li className="nav-item">
+					<Link to="/my-listings" className="nav-link">
+						My Listings
 					</Link>
 				</li>
 			</ul>

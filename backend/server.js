@@ -64,6 +64,39 @@ app.post('/product', async (req, res) => {
 	}
 });
 
+// Route to update a product
+app.put('/product/:id', async (req, res) => {
+	try {
+		const { name, description, price, category, imageUrl } = req.body;
+		const updatedProduct = await Product.findByIdAndUpdate(
+			req.params.id,
+			{ name, description, price, category, imageUrl },
+			{ new: true, runValidators: true }
+		);
+		if (!updatedProduct) {
+			return res.status(404).json({ message: 'Product not found' });
+		}
+		res.json(updatedProduct);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ message: 'Server Error' });
+	}
+});
+
+// Route to delete a product
+app.delete('/product/:id', async (req, res) => {
+	try {
+		const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+		if (!deletedProduct) {
+			return res.status(404).json({ message: 'Product not found' });
+		}
+		res.json({ message: 'Product deleted' });
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ message: 'Server Error' });
+	}
+});
+
 // Start the server
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);

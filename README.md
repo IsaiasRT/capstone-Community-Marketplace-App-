@@ -93,7 +93,7 @@ npm run dev
 - https://mhw-db.com
 - https://nodejs.org/
 - https://github.com/IsaiasRT
-
+- https://www.geeksforgeeks.org/mern/community-marketplace-app-using-mern-stack/
 # 📅 Timeline
 
 **Due Date:** 08/07/2026
