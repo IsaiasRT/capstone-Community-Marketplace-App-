@@ -89,20 +89,7 @@ node server.js
 
 ```
 
----
 
-# 📍 Current Status & Blockers
-
-The application runs without errors. Verification performed:
-
-- **Back-end:** `node server.js` starts successfully and connects to MongoDB Atlas. All four CRUD endpoints (`GET /product`, `POST /product`, `PUT /product/:id`, `DELETE /product/:id`) were tested and return correct responses.
-- **Front-end:** `npm run lint` (oxlint) passes with zero warnings/errors. `npm run build` (Vite) completes successfully.
-
-Nothing required commenting out — all features currently implemented work. The following requirements are **not yet implemented** (blockers that still receive partial credit per the rubric):
-
-- **User authentication/authorization (2%)** — the API has no login/register or protected routes yet.
-- **Database indexes (2%)** — the `Product` schema defines no indexes.
-- **Presentation section (5%)** — the Overview, Objectives, use cases, and lessons-learned write-ups in this README are still to be completed.
 
 ---
 
