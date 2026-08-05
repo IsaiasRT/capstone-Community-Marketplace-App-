@@ -18,7 +18,7 @@ export default function MyListings() {
 		setLoading(true);
 		setError('');
 		try {
-			const response = await api.get('/product');
+			const response = await api.get('/product/mine');
 			setProducts(response.data);
 		} catch (error) {
 			console.error('Error:', error);

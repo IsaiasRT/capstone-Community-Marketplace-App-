@@ -12,6 +12,11 @@ const productSchema = new mongoose.Schema({
 	},
 	category: String,
 	imageUrl: String, // Directly store image URL
+	owner: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	}
 });
 
 module.exports = mongoose.model('Product', productSchema);
