@@ -1,6 +1,6 @@
 // Seller.js
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 import ProductForm from './ProductForm.jsx';
 
 export default function Seller() {
@@ -8,8 +8,7 @@ export default function Seller() {
 
 	const handleAdd = async (formData) => {
 		try {
-			const response = await axios.post('http://localhost:5000/product',
-				formData);
+			const response = await api.post('/product', formData);
 			setMessage(`Added "${response.data.name}"`);
 		} catch (error) {
 			console.error('Error:', error);

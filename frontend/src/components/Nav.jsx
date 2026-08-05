@@ -1,7 +1,10 @@
 // Nav.js
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import { useAuth } from '../context/useAuth';
 
 export default function Nav({ cartCount }) {
+	const { user, logout } = useAuth();
+
 	return (
 		<nav className="navbar">
 			<h1 className="navbar-brand">
@@ -13,21 +16,46 @@ export default function Nav({ cartCount }) {
 						Home
 					</Link>
 				</li>
-				<li className="nav-item">
-					<Link to="/seller" className="nav-link">
-						Become a Seller
-					</Link>
-				</li>
-				<li className="nav-item">
-					<Link to="/my-listings" className="nav-link">
-						My Listings
-					</Link>
-				</li>
+				{user && (
+					<>
+						<li className="nav-item">
+							<Link to="/seller" className="nav-link">
+								Become a Seller
+							</Link>
+						</li>
+						<li className="nav-item">
+							<Link to="/my-listings" className="nav-link">
+								My Listings
+							</Link>
+						</li>
+					</>
+				)}
 				<li className="nav-item">
 					<Link to="/cart" className="nav-link">
 						Cart {cartCount > 0 && `(${cartCount})`}
 					</Link>
 				</li>
+				{user ? (
+					<li className="nav-item">
+						<span className="nav-user">{user.name}</span>
+						<button className="nav-link nav-button" onClick={logout}>
+							Logout
+						</button>
+					</li>
+				) : (
+					<>
+						<li className="nav-item">
+							<Link to="/login" className="nav-link">
+								Log In
+							</Link>
+						</li>
+						<li className="nav-item">
+							<Link to="/register" className="nav-link">
+								Register
+							</Link>
+						</li>
+					</>
+				)}
 			</ul>
 		</nav>
 	);

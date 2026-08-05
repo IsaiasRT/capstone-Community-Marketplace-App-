@@ -216,3 +216,16 @@ h2 {
   border-radius: 5px;
 }
 
+/* Auth styles */
+.nav-user {
+  color: #fff;
+  margin-right: 10px;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+

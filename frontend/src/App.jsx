@@ -5,6 +5,9 @@ import ProductList from './components/ProductList.jsx'
 import Seller from './components/Seller.jsx'
 import MyListings from './components/MyListings.jsx'
 import Cart from './components/Cart.jsx'
+import Login from './components/Login.jsx'
+import Register from './components/Register.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 export default function App() {
   const [cart, setCart] = useState([])
@@ -39,8 +42,10 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<ProductList onAddToCart={addToCart} />} />
-          <Route path="/seller" element={<Seller />} />
-          <Route path="/my-listings" element={<MyListings />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/seller" element={<ProtectedRoute><Seller /></ProtectedRoute>} />
+          <Route path="/my-listings" element={<ProtectedRoute><MyListings /></ProtectedRoute>} />
           <Route
             path="/cart"
             element={

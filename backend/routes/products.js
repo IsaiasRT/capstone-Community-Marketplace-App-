@@ -1,5 +1,6 @@
 const express = require('express');
 const Product = require('../models/Product');
+const { protect } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -13,8 +14,8 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-// Route to add new product
-router.post('/', async (req, res, next) => {
+// Route to add new product (protected)
+router.post('/', protect, async (req, res, next) => {
 	try {
 		const { name, description, price, category, imageUrl } = req.body;
 		const newProduct = new Product({
@@ -31,8 +32,8 @@ router.post('/', async (req, res, next) => {
 	}
 });
 
-// Route to update a product
-router.put('/:id', async (req, res, next) => {
+// Route to update a product (protected)
+router.put('/:id', protect, async (req, res, next) => {
 	try {
 		const { name, description, price, category, imageUrl } = req.body;
 		const updatedProduct = await Product.findByIdAndUpdate(
@@ -49,8 +50,8 @@ router.put('/:id', async (req, res, next) => {
 	}
 });
 
-// Route to delete a product
-router.delete('/:id', async (req, res, next) => {
+// Route to delete a product (protected)
+router.delete('/:id', protect, async (req, res, next) => {
 	try {
 		const deletedProduct = await Product.findByIdAndDelete(req.params.id);
 		if (!deletedProduct) {

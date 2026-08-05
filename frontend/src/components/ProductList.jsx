@@ -1,6 +1,6 @@
 // ProductList.js
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 export default function ProductList({ onAddToCart }) {
 	const [products, setProducts] = useState([]);
@@ -15,7 +15,7 @@ export default function ProductList({ onAddToCart }) {
 		setLoading(true);
 		setError('');
 		try {
-			const response = await axios.get('http://localhost:5000/product');
+			const response = await api.get('/product');
 			setProducts(response.data);
 		} catch (error) {
 			console.error('Error:', error);

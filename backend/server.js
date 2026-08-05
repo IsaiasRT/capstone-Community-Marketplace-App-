@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const productRoutes = require('./routes/products');
+const authRoutes = require('./routes/auth');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(express.json());
 
 // Routes
 app.use('/product', productRoutes);
+app.use('/api/auth', authRoutes);
 
 // Error handling middleware (must come after routes)
 app.use(notFound);

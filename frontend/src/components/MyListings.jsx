@@ -1,6 +1,6 @@
 // MyListings.js
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 import ProductForm from './ProductForm.jsx';
 
 export default function MyListings() {
@@ -18,7 +18,7 @@ export default function MyListings() {
 		setLoading(true);
 		setError('');
 		try {
-			const response = await axios.get('http://localhost:5000/product');
+			const response = await api.get('/product');
 			setProducts(response.data);
 		} catch (error) {
 			console.error('Error:', error);
@@ -35,8 +35,8 @@ export default function MyListings() {
 
 	const handleUpdate = async (formData) => {
 		try {
-			const response = await axios.put(
-				`http://localhost:5000/product/${editingProduct._id}`,
+			const response = await api.put(
+				`/product/${editingProduct._id}`,
 				formData
 			);
 			setMessage(`Updated "${response.data.name}"`);
@@ -53,7 +53,7 @@ export default function MyListings() {
 			return;
 		}
 		try {
-			await axios.delete(`http://localhost:5000/product/${id}`);
+			await api.delete(`/product/${id}`);
 			setMessage(`Deleted "${name}"`);
 			setEditingProduct(null);
 			fetchProducts();
