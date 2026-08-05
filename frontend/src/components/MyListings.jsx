@@ -7,17 +7,24 @@ export default function MyListings() {
 	const [products, setProducts] = useState([]);
 	const [editingProduct, setEditingProduct] = useState(null);
 	const [message, setMessage] = useState('');
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState('');
 
 	useEffect(() => {
 		fetchProducts();
 	}, []);
 
 	const fetchProducts = async () => {
+		setLoading(true);
+		setError('');
 		try {
 			const response = await axios.get('http://localhost:5000/product');
 			setProducts(response.data);
 		} catch (error) {
 			console.error('Error:', error);
+			setError('Unable to load listings. Please make sure the server is running and try again.');
+		} finally {
+			setLoading(false);
 		}
 	}
 
@@ -78,6 +85,16 @@ export default function MyListings() {
 				</div>
 			)}
 			{message && <p>{message}</p>}
+			{loading ? (
+				<p>Loading listings...</p>
+			) : error ? (
+				<>
+					<p>{error}</p>
+					<button onClick={fetchProducts}>Retry</button>
+				</>
+			) : products.length === 0 ? (
+				<p>You have no listings yet. Head to "Become a Seller" to add your first product!</p>
+			) : (
 			<div className="product-list">
 				{products.map((product) => (
 					<div key={product._id} className="product">
@@ -100,6 +117,7 @@ export default function MyListings() {
 					</div>
 				))}
 			</div>
+			)}
 		</div>
 	);
 }

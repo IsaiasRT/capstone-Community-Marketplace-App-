@@ -46,7 +46,7 @@ https://github.com/IsaiasRT
 - [] Create a RESTful API using Node and Express. For the purposes of this project, you may forgo the HATEOAS aspect of REST APIs. (%7)
 - [] Include API routes for all four CRUD operations.(%5)
 - [] Utilize the native MongoDB driver or Mongoose to interface with your database. (%5)
-- [] Use Axios or fetch to retrieve data from an API. (%2)
+- [] Include at least one form of user authentication/authorization within the application. (%2)
 
  **(35%) Front-End Development**
 - [] Use React to create the application's front-end. (%10)
@@ -91,15 +91,35 @@ node server.js
 
 ---
 
+# 📍 Current Status & Blockers
+
+The application runs without errors. Verification performed:
+
+- **Back-end:** `node server.js` starts successfully and connects to MongoDB Atlas. All four CRUD endpoints (`GET /product`, `POST /product`, `PUT /product/:id`, `DELETE /product/:id`) were tested and return correct responses.
+- **Front-end:** `npm run lint` (oxlint) passes with zero warnings/errors. `npm run build` (Vite) completes successfully.
+
+Nothing required commenting out — all features currently implemented work. The following requirements are **not yet implemented** (blockers that still receive partial credit per the rubric):
+
+- **User authentication/authorization (2%)** — the API has no login/register or protected routes yet.
+- **Database indexes (2%)** — the `Product` schema defines no indexes.
+- **Presentation section (5%)** — the Overview, Objectives, use cases, and lessons-learned write-ups in this README are still to be completed.
+
+---
+
 # 📚 References
 - https://react.dev/
 - https://reactrouter.com/
 - https://vitejs.dev/
-- https://www.mongodb.com/docs/ (unused — project is client-side only)
-- https://mhw-db.com
+- https://www.mongodb.com/docs/manual/indexes/
+- https://expressjs.com/
 - https://nodejs.org/
 - https://github.com/IsaiasRT
 - https://www.geeksforgeeks.org/mern/community-marketplace-app-using-mern-stack/
+
+# Scrum 
+
+https://capstone-community-market-app.atlassian.net/jira/software/projects/SCRUM/boards/1?filter=&groupBy=none
+
 # 📅 Timeline
 
 **Due Date:** 08/07/2026

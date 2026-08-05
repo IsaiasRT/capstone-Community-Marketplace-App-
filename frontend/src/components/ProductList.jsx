@@ -4,42 +4,72 @@ import axios from 'axios';
 
 export default function ProductList({ onAddToCart }) {
 	const [products, setProducts] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState('');
 
 	useEffect(() => {
 		fetchProducts();
 	}, []);
 
 	const fetchProducts = async () => {
+		setLoading(true);
+		setError('');
 		try {
 			const response = await axios.get('http://localhost:5000/product');
 			setProducts(response.data);
 		} catch (error) {
 			console.error('Error:', error);
+			setError('Unable to load products. Please make sure the server is running and try again.');
+		} finally {
+			setLoading(false);
 		}
+	}
+
+	if (loading) {
+		return (
+			<div className="container">
+				<h2>Products</h2>
+				<p>Loading products...</p>
+			</div>
+		);
+	}
+
+	if (error) {
+		return (
+			<div className="container">
+				<h2>Products</h2>
+				<p>{error}</p>
+				<button onClick={fetchProducts}>Retry</button>
+			</div>
+		);
 	}
 
 	return (
 		<div className="container">
 			<h2>Products</h2>
-			<div className="product-list">
-				{products.map((product) => (
-					<div key={product._id} className="product">
-						<h3>{product.name}</h3>
-						<img src={product.imageUrl}
-							alt={product.name} className="product-image" />
-						<p className="product-description">
-							Description: {product.description}
-						</p>
-						<p className="product-price">
-							Price: ${product.price}
-						</p>
-						<p className="product-category">
-							Category: {product.category}
-						</p>
-						<button onClick={() => onAddToCart(product)}>Add to cart</button>
-					</div>
-				))}
-			</div>
+			{products.length === 0 ? (
+				<p>No products yet. Be the first to sell something!</p>
+			) : (
+				<div className="product-list">
+					{products.map((product) => (
+						<div key={product._id} className="product">
+							<h3>{product.name}</h3>
+							<img src={product.imageUrl}
+								alt={product.name} className="product-image" />
+							<p className="product-description">
+								Description: {product.description}
+							</p>
+							<p className="product-price">
+								Price: ${product.price}
+							</p>
+							<p className="product-category">
+								Category: {product.category}
+							</p>
+							<button onClick={() => onAddToCart(product)}>Add to cart</button>
+						</div>
+					))}
+				</div>
+			)}
 		</div>
 	);
 }
