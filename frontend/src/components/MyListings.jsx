@@ -9,6 +9,7 @@ export default function MyListings() {
 	const [message, setMessage] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
+	const [search, setSearch] = useState('');
 
 	useEffect(() => {
 		fetchProducts();
@@ -68,6 +69,14 @@ export default function MyListings() {
 		setMessage('');
 	}
 
+	const query = search.trim().toLowerCase();
+	const filteredProducts = products.filter((p) =>
+		!query ||
+		(p.name || '').toLowerCase().includes(query) ||
+		(p.description || '').toLowerCase().includes(query) ||
+		(p.category || '').toLowerCase().includes(query)
+	);
+
 	return (
 		<div>
 			<h2>My Listings</h2>
@@ -85,6 +94,15 @@ export default function MyListings() {
 				</div>
 			)}
 			{message && <p>{message}</p>}
+			{!loading && !error && (
+				<input
+					type="search"
+					className="search-bar"
+					placeholder="Search my listings..."
+					value={search}
+					onChange={(e) => setSearch(e.target.value)}
+				/>
+			)}
 			{loading ? (
 				<p>Loading listings...</p>
 			) : error ? (
@@ -92,11 +110,11 @@ export default function MyListings() {
 					<p>{error}</p>
 					<button onClick={fetchProducts}>Retry</button>
 				</>
-			) : products.length === 0 ? (
-				<p>You have no listings yet. Head to "Become a Seller" to add your first product!</p>
+			) : filteredProducts.length === 0 ? (
+				<p>{query ? `No listings match "${search}".` : 'You have no listings yet. Head to "Become a Seller" to add your first product!'}</p>
 			) : (
 			<div className="product-list">
-				{products.map((product) => (
+				{filteredProducts.map((product) => (
 					<div key={product._id} className="product">
 						<h3>{product.name}</h3>
 						<img src={product.imageUrl}
