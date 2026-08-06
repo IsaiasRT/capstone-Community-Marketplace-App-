@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router'
 import Nav from './components/Nav.jsx'
 import ProductList from './components/ProductList.jsx'
@@ -9,8 +9,23 @@ import Login from './components/Login.jsx'
 import Register from './components/Register.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
+const getInitialTheme = () => {
+  const saved = localStorage.getItem('theme')
+  if (saved) return saved
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
 export default function App() {
   const [cart, setCart] = useState([])
+  const [theme, setTheme] = useState(getInitialTheme)
+
+  const toggleTheme = () => {
+    setTheme((current) => {
+      const next = current === 'light' ? 'dark' : 'light'
+      localStorage.setItem('theme', next)
+      return next
+    })
+  }
 
   const addToCart = (product) => {
     setCart((current) => {
@@ -48,9 +63,13 @@ export default function App() {
     setCart([])
   }
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
+
   return (
     <>
-      <Nav cartCount={cart.reduce((sum, item) => sum + item.quantity, 0)} />
+      <Nav cartCount={cart.reduce((sum, item) => sum + item.quantity, 0)} theme={theme} onToggleTheme={toggleTheme} />
       <main>
         <Routes>
           <Route path="/" element={<ProductList onAddToCart={addToCart} />} />

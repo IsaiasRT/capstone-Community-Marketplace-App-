@@ -2,7 +2,7 @@
 import { Link } from 'react-router';
 import { useAuth } from '../context/useAuth';
 
-export default function Nav({ cartCount }) {
+export default function Nav({ cartCount, theme, onToggleTheme }) {
 	const { user, logout } = useAuth();
 
 	return (
@@ -11,6 +11,11 @@ export default function Nav({ cartCount }) {
 				Marketplace
 			</h1>
 			<ul className="nav-links">
+				<li className="nav-item">
+					<button className="nav-link nav-button theme-toggle" onClick={onToggleTheme} title="Toggle light/dark theme">
+						{theme === 'dark' ? 'Light' : 'Dark'}
+					</button>
+				</li>
 				<li className="nav-item">
 					<Link to="/" className="nav-link">
 						Home
