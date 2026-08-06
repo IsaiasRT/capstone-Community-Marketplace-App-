@@ -115,6 +115,9 @@ a {
   margin: 0;
   font-size: 22px;
   color: #fff;
+  font-family: 'Online Market', cursive;
+  font-size: 40px;
+  font-weight: 400;
 }
 
 .nav-links {

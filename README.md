@@ -1,4 +1,4 @@
-### Skilled Based Assessment (SBA) -React Web Application Project 
+### Skilled Based Assessment (SBA) -Capstone Completion 
 ### Per Scholas Software Engineering Bootcamp
 
 ## 👤 GitHub

@@ -28,6 +28,7 @@ export default function App() {
   }
 
   const addToCart = (product) => {
+    alert(`Added ${product.name} to the cart!`)
     setCart((current) => {
       const existing = current.find((item) => item.product._id === product._id)
       if (existing) {
