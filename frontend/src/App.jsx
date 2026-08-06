@@ -61,6 +61,7 @@ export default function App() {
 
   const clearCart = () => {
     setCart([])
+    alert('Thank you for Shopping!')
   }
 
   useEffect(() => {
