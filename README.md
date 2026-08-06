@@ -102,7 +102,8 @@ node server.js
 - https://nodejs.org/
 - https://github.com/IsaiasRT
 - https://www.geeksforgeeks.org/mern/community-marketplace-app-using-mern-stack/
-
+- https://csszengarden.com/220/
+- https://www.reddit.com/r/webdev/comments/13r52gk/mern_stack_authentication_without_jwt/
 # Scrum 
 
 https://capstone-community-market-app.atlassian.net/jira/software/projects/SCRUM/boards/1?filter=&groupBy=none
