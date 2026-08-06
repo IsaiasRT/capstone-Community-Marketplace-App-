@@ -26,7 +26,19 @@ export default function App() {
     })
   }
 
-  const removeFromCart = (productId) => {
+  const removeQuantity = (productId) => {
+    setCart((current) =>
+      current
+        .map((item) =>
+          item.product._id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    )
+  }
+
+  const removeAllFromCart = (productId) => {
     setCart((current) =>
       current.filter((item) => item.product._id !== productId)
     )
@@ -49,7 +61,7 @@ export default function App() {
           <Route
             path="/cart"
             element={
-              <Cart cart={cart} onRemove={removeFromCart} onClear={clearCart} />
+              <Cart cart={cart} onRemove={removeQuantity} onRemoveAll={removeAllFromCart} onClear={clearCart} />
             }
           />
         </Routes>

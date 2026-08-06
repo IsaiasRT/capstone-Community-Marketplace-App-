@@ -1,5 +1,5 @@
 // Cart.js
-export default function Cart({ cart, onRemove, onClear }) {
+export default function Cart({ cart, onRemove, onRemoveAll, onClear }) {
 	const total = cart.reduce(
 		(sum, item) => sum + item.product.price * item.quantity, 0
 	);
@@ -25,6 +25,9 @@ export default function Cart({ cart, onRemove, onClear }) {
 								</p>
 								<button onClick={() => onRemove(item.product._id)}>
 									Remove
+								</button>
+								<button className="form-submit" onClick={() => onRemoveAll(item.product._id)}>
+									Remove All
 								</button>
 							</div>
 						))}
