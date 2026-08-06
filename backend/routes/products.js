@@ -7,7 +7,7 @@ const router = express.Router();
 // Route to fetch products
 router.get('/', async (req, res, next) => {
 	try {
-		const products = await Product.find();
+		const products = await Product.find().populate('owner', 'name email _id');
 		res.json(products);
 	} catch (err) {
 		next(err);
@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 // Route to fetch the authenticated user's products (protected)
 router.get('/mine', protect, async (req, res, next) => {
 	try {
-		const products = await Product.find({ owner: req.user._id });
+		const products = await Product.find({ owner: req.user._id }).populate('owner', 'name email _id');
 		res.json(products);
 	} catch (err) {
 		next(err);
@@ -37,7 +37,8 @@ router.post('/', protect, async (req, res, next) => {
 			owner: req.user._id,
 		});
 		const savedProduct = await newProduct.save();
-		res.status(201).json(savedProduct);
+		const populated = await savedProduct.populate('owner', 'name email _id');
+		res.status(201).json(populated);
 	} catch (err) {
 		next(err);
 	}

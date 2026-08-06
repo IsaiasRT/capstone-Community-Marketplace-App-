@@ -65,6 +65,9 @@ export default function ProductList({ onAddToCart }) {
 							<p className="product-category">
 								Category: {product.category}
 							</p>
+							<p className="product-owner">
+								Seller: {product.owner?.name || 'Unknown'}
+							</p>
 							<button onClick={() => onAddToCart(product)}>Add to cart</button>
 						</div>
 					))}
