@@ -7,6 +7,7 @@ export default function ProductList({ onAddToCart }) {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
 	const [filter, setFilter] = useState('all');
+	const [search, setSearch] = useState('');
 
 	useEffect(() => {
 		fetchProducts();
@@ -27,7 +28,17 @@ export default function ProductList({ onAddToCart }) {
 	}
 
 	const categories = [...new Set(products.map((p) => p.category).filter(Boolean))].sort();
-	const filteredProducts = filter === 'all' ? products : products.filter((p) => p.category === filter);
+
+	const query = search.trim().toLowerCase();
+	const filteredProducts = products.filter((p) => {
+		const matchesCategory = filter === 'all' || p.category === filter;
+		const matchesSearch =
+			!query ||
+			(p.name || '').toLowerCase().includes(query) ||
+			(p.description || '').toLowerCase().includes(query) ||
+			(p.category || '').toLowerCase().includes(query);
+		return matchesCategory && matchesSearch;
+	});
 
 	if (loading) {
 		return (
@@ -51,6 +62,13 @@ export default function ProductList({ onAddToCart }) {
 	return (
 		<div className="container">
 			<h2>Products</h2>
+			<input
+				type="search"
+				className="search-bar"
+				placeholder="Search products..."
+				value={search}
+				onChange={(e) => setSearch(e.target.value)}
+			/>
 			{categories.length > 0 && (
 				<div className="category-filter">
 					<label htmlFor="category">Filter by category: </label>
@@ -63,7 +81,7 @@ export default function ProductList({ onAddToCart }) {
 				</div>
 			)}
 			{filteredProducts.length === 0 ? (
-				<p>No products yet. Be the first to sell something!</p>
+				<p>{query ? `No products match "${search}".` : 'No products yet. Be the first to sell something!'}</p>
 			) : (
 				<div className="product-list">
 					{filteredProducts.map((product) => (

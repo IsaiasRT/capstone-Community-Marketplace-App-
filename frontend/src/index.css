@@ -187,6 +187,24 @@ a {
   color: var(--text);
 }
 
+.search-bar {
+  width: 100%;
+  max-width: 360px;
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 8px 12px;
+  margin: 0 0 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: var(--accent, #0a7cc2);
+}
+
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
