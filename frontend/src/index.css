@@ -166,6 +166,27 @@ a {
 
 /* ===== Product grid ===== */
 
+.category-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.category-filter label {
+  font-weight: 600;
+}
+
+.category-filter select {
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));

@@ -6,6 +6,7 @@ export default function ProductList({ onAddToCart }) {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
+	const [filter, setFilter] = useState('all');
 
 	useEffect(() => {
 		fetchProducts();
@@ -24,6 +25,9 @@ export default function ProductList({ onAddToCart }) {
 			setLoading(false);
 		}
 	}
+
+	const categories = [...new Set(products.map((p) => p.category).filter(Boolean))].sort();
+	const filteredProducts = filter === 'all' ? products : products.filter((p) => p.category === filter);
 
 	if (loading) {
 		return (
@@ -47,11 +51,22 @@ export default function ProductList({ onAddToCart }) {
 	return (
 		<div className="container">
 			<h2>Products</h2>
-			{products.length === 0 ? (
+			{categories.length > 0 && (
+				<div className="category-filter">
+					<label htmlFor="category">Filter by category: </label>
+					<select id="category" value={filter} onChange={(e) => setFilter(e.target.value)}>
+						<option value="all">All categories</option>
+						{categories.map((category) => (
+							<option key={category} value={category}>{category}</option>
+						))}
+					</select>
+				</div>
+			)}
+			{filteredProducts.length === 0 ? (
 				<p>No products yet. Be the first to sell something!</p>
 			) : (
 				<div className="product-list">
-					{products.map((product) => (
+					{filteredProducts.map((product) => (
 						<div key={product._id} className="product">
 							<h3>{product.name}</h3>
 							<img src={product.imageUrl}
