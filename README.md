@@ -8,22 +8,43 @@ https://github.com/IsaiasRT
 
 ---
 
-# 📖 Description
+## Short Overview
 
-**Community Marketplace App** is a full-stack web application built with the MERN stack (MongoDB, Express, React, Node.js) that lets members of a community buy and sell products with each other. Buyers can browse all listings, filter products by category, and manage a shopping cart with a running total and checkout. Registered users can also become sellers, create new listings, and edit or delete their own products. The app features JWT-based authentication and authorization (protected routes ensure only the owner can modify their listings), a clean and responsive UI, and a light/dark theme toggle.
+**Community Marketplace App** is a full-stack MERN application that allows members of a community to buy and sell products with each other. 
+It provides a public, filterable product catalog with a shopping cart and themed checkout flow for buyers, while registered users can become sellers to create, edit, and delete their own listings. 
+The app includes JWT-based authentication, protected routes, a clean responsive UI, and a light/dark theme toggle.
 
----
 
-# 🎯 Objectives
+## Use Cases
 
-- Build a RESTful API with Node.js and Express, implementing full CRUD (create, read, update, delete) routes for products.
-- Use MongoDB with Mongoose schemas and indexes to persist users and products in a data-modeling best-practices way.
-- Provide user authentication/authorization (register, login, protected routes) secured with JSON Web Tokens and hashed passwords.
-- Create a React single-page application with at least four views (Home, Login, Register, Cart, Become a Seller, My Listings) and persistent navigation via React Router.
-- Manage application state with React Hooks and Context (cart, theme, auth session).
-- Use Axios to interface directly with the backend API, including an interceptor that attaches the JWT.
-- Apply sound ES6+ programming practices: async/await, Promises, reusable components, and centralized exception handling.
-- Deliver a polished user experience with loading, error, and empty states, plus a light/dark theme toggle.
+- **As a buyer**, I can browse all active listings, filter products by category, add items to my cart, and see a running total with a checkout flow.
+- **As a registered user**, I can log in and manage my own listings.
+- **As a seller**, I can create new product listings and edit or delete only the products I own, thanks to protected routes and ownership checks.
+- **As the community**, the app provides a secure, authenticated marketplace where every request is verified to prevent unauthorized changes.
+
+## Technical Functionality (High-Level)
+
+- **Backend (REST API):** Node.js + Express exposes full CRUD routes for products (`routes/products.js`) and register/login routes for auth (`routes/auth.js`). Passwords are hashed with bcrypt before saving, and authentication is enforced via a JWT middleware (`middleware/auth.js`).
+- **Database:** MongoDB with Mongoose. The `User` schema stores hashed passwords and a unique indexed email, and the `Product` schema references its owner. Centralized exception handling is provided in `middleware/errorHandler.js`.
+- **Frontend (React + Vite):** A single-page app with navigation via React Router and multiple views (Home, Login, Register, Cart, Become a Seller, My Listings). State is managed with React Context and Hooks for the cart, theme, and auth session.
+- **API integration:** A shared Axios instance (`frontend/src/api.js`) uses a request interceptor to attach the user's JWT to every request automatically.
+- **Security & quality:** Protected routes guard seller actions, async/await is used throughout, and loading, error, and empty states are handled for a polished UX.
+
+## Lessons Learned
+
+- Building a REST API and consuming it from React clarified how the client, server, and database interact through a well-defined interface.
+- Implementing JWT-based auth plus a request interceptor taught the importance of securing not just routes but every API call.
+- Modeling data with Mongoose emphasized the value of schema design, indexes, and ownership references (e.g., a product belonging to a user).
+- Managing auth, cart, and theme with Context and Hooks reinforced how React handles shared application state across views.
+
+## Future Features
+
+- Real image uploading instead of stored image URLs.
+- In-app messaging between buyers and sellers.
+- Product ratings and reviews.
+- Payment integration (e.g., Stripe) for end-to-end checkout.
+- Search by keyword, saved/favorite listings, and recommendation features.
+- Admin moderation and member verification for the community.
 
 ---
 
@@ -67,24 +88,16 @@ https://github.com/IsaiasRT
 - [x] interface directly with the server and API that you created. (%5)
 
  **(5%) presentation**
-- [] Create a short overview of your application. (%1)
-- [] Highlight the use cases of your applications. (%1)
-- [] Highlight the technical functionality of the application, from a high-level perspective. (%1)
-- [] Discuss what you have learned trhough the development of the application(%1)
-- [] Discuss additional features that could be added to the application in the future. (%1)
+- [x] Create a short overview of your application. (%1)
+- [x] Highlight the use cases of your applications. (%1)
+- [x] Highlight the technical functionality of the application, from a high-level perspective. (%1)
+- [x] Discuss any lessons learned through the development of the application. (%1)
+- [x] Discuss additional features that could be added to the application in the future. (%1)
 
  **OPTIONAL(5%) Extra Credit**
 - [] Adhere to Agile principles and the Scrum framework. Perform stand-up sessions (with an instructor) when possible. (%1)
 - [] Build your application primarily with TypeScript.(%3)
 - [X] Successfully track your project using a software similar to Jira. (%1)
-
-
-
-
-
-
----
-
 
 ## 🚀 Getting Started
 
@@ -98,8 +111,6 @@ npm install
 node server.js
 
 ```
-
-
 
 ---
 
