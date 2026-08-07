@@ -40,8 +40,8 @@ router.post('/', protect, async (req, res, next) => {
 		if (price === undefined || price === null || price === '') {
 			return res.status(400).json({ message: 'Price is required' });
 		}
-		if (Number(price) < 0) {
-			return res.status(400).json({ message: 'Price cannot be negative' });
+		if (Number(price) < 1) {
+			return res.status(400).json({ message: 'Price must be at least 1' });
 		}
 
 		const newProduct = new Product({
@@ -80,8 +80,8 @@ router.put('/:id', protect, async (req, res, next) => {
 		if (trimmed.name !== undefined && !trimmed.name) {
 			return res.status(400).json({ message: 'Name cannot be empty' });
 		}
-		if (price !== undefined && price !== null && price !== '' && Number(price) < 0) {
-			return res.status(400).json({ message: 'Price cannot be negative' });
+		if (price !== undefined && price !== null && price !== '' && Number(price) < 1) {
+			return res.status(400).json({ message: 'Price must be at least 1' });
 		}
 
 		const updatedProduct = await Product.findByIdAndUpdate(

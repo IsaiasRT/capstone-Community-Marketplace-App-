@@ -28,6 +28,15 @@ export default function ProductForm({ initialProduct, buttonLabel = 'Submit', on
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const { name, description, price, category } = formData;
+		if (!name.trim() || !description.trim() || !price || !category.trim()) {
+			alert('Please fill in all required fields');
+			return;
+		}
+		if (Number(price) < 1) {
+			alert('Price must be at least 1');
+			return;
+		}
 		await onSubmit(formData);
 		if (!initialProduct) {
 			setFormData(emptyForm);
