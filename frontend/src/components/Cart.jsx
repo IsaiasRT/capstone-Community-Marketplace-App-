@@ -1,8 +1,22 @@
 // Cart.js
+import { useNavigate, Link } from 'react-router';
+import { useAuth } from '../context/useAuth.js';
+
 export default function Cart({ cart, onRemove, onRemoveAll, onClear }) {
 	const total = cart.reduce(
 		(sum, item) => sum + item.product.price * item.quantity, 0
 	);
+	const { user } = useAuth();
+	const navigate = useNavigate();
+
+	const handleCheckout = () => {
+		if (!user) {
+			alert('Please log in or register to complete your purchase.');
+			navigate('/login');
+			return;
+		}
+		onClear();
+	};
 
 	return (
 		<div className="container">
@@ -33,9 +47,16 @@ export default function Cart({ cart, onRemove, onRemoveAll, onClear }) {
 						))}
 					</div>
 					<h3>Total: ${total}</h3>
-					<button className="form-submit" onClick={onClear}>
-						Checkout
-					</button>
+					{user ? (
+						<button className="form-submit" onClick={handleCheckout}>
+							Checkout
+						</button>
+					) : (
+						<p>
+							Please <Link to="/login">log in</Link> or{' '}
+							<Link to="/register">register</Link> to checkout.
+						</p>
+					)}
 				</>
 			)}
 		</div>
