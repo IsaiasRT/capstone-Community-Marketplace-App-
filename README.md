@@ -130,6 +130,10 @@ node server.js
 
 https://capstone-community-market-app.atlassian.net/jira/software/projects/SCRUM/boards/1?filter=&groupBy=none
 
+# Netlify 
+
+https://community-marketplace-app.netlify.app/
+
 # 📅 Timeline
 
 **Due Date:** 08/07/2026
