@@ -1,6 +1,7 @@
 // Nav.js
 import { Link } from 'react-router';
 import { useAuth } from '../context/useAuth';
+import ecommerceIcon from '../assets/ecommerce.png';
 
 export default function Nav({ cartCount, theme, onToggleTheme }) {
 	const { user, logout } = useAuth();
@@ -8,6 +9,7 @@ export default function Nav({ cartCount, theme, onToggleTheme }) {
 	return (
 		<nav className="navbar">
 			<h1 className="navbar-brand">
+				<img src={ecommerceIcon} alt="Marketplace" className="brand-icon" />
 				Marketplace
 			</h1>
 			<ul className="nav-links">

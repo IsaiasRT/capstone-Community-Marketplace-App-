@@ -7,6 +7,7 @@ export default function ProductList({ onAddToCart }) {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
 	const [filter, setFilter] = useState('all');
+	const [sort, setSort] = useState('none');
 	const [search, setSearch] = useState('');
 
 	useEffect(() => {
@@ -38,6 +39,10 @@ export default function ProductList({ onAddToCart }) {
 			(p.description || '').toLowerCase().includes(query) ||
 			(p.category || '').toLowerCase().includes(query);
 		return matchesCategory && matchesSearch;
+	}).sort((a, b) => {
+		if (sort === 'low') return a.price - b.price;
+		if (sort === 'high') return b.price - a.price;
+		return 0;
 	});
 
 	if (loading) {
@@ -80,6 +85,14 @@ export default function ProductList({ onAddToCart }) {
 					</select>
 				</div>
 			)}
+			<div className="category-filter">
+				<label htmlFor="sort">Sort by price: </label>
+				<select id="sort" value={sort} onChange={(e) => setSort(e.target.value)}>
+					<option value="none">Default</option>
+					<option value="low">Price: Low to High</option>
+					<option value="high">Price: High to Low</option>
+				</select>
+			</div>
 			{filteredProducts.length === 0 ? (
 				<p>{query ? `No products match "${search}".` : 'No products yet. Be the first to sell something!'}</p>
 			) : (

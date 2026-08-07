@@ -17,7 +17,7 @@ The app includes JWT-based authentication, protected routes, a clean responsive 
 
 ## Use Cases
 
-- **As a buyer**, I can browse all active listings, filter products by category, add items to my cart, and see a running total with a checkout flow.
+- **As a buyer**, I can browse all active listings, filter products by category and sort them by price (low to high or high to low), add items to my cart, and see a running total with a checkout flow.
 - **As a registered user**, I can log in and manage my own listings.
 - **As a seller**, I can create new product listings and edit or delete only the products I own, thanks to protected routes and ownership checks.
 - **As the community**, the app provides a secure, authenticated marketplace where every request is verified to prevent unauthorized changes.
@@ -39,12 +39,12 @@ The app includes JWT-based authentication, protected routes, a clean responsive 
 
 ## Future Features
 
-- Real image uploading instead of stored image URLs.
-- In-app messaging between buyers and sellers.
-- Product ratings and reviews.
-- Payment integration (e.g., Stripe) for end-to-end checkout.
-- Search by keyword, saved/favorite listings, and recommendation features.
-- Admin moderation and member verification for the community.
+- [] Real image uploading instead of stored image URLs.
+- [] In-app messaging between buyers and sellers.
+- [] Product ratings and reviews.
+- [] Payment integration (e.g., Stripe) for end-to-end checkout.
+- [] Search by keyword, saved/favorite listings, and recommendation features.
+- [] Admin moderation and member verification for the community.
 
 ---
 
@@ -125,6 +125,7 @@ node server.js
 - https://www.geeksforgeeks.org/mern/community-marketplace-app-using-mern-stack/
 - https://csszengarden.com/220/
 - https://www.reddit.com/r/webdev/comments/13r52gk/mern_stack_authentication_without_jwt/
+- https://www.dafont.com/online-market.font
 # Scrum 
 
 https://capstone-community-market-app.atlassian.net/jira/software/projects/SCRUM/boards/1?filter=&groupBy=none
