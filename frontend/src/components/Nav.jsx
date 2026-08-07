@@ -1,17 +1,13 @@
 // Nav.js
 import { Link } from 'react-router';
 import { useAuth } from '../context/useAuth';
-import ecommerceIcon from '../assets/ecommerce.png';
 
 export default function Nav({ cartCount, theme, onToggleTheme }) {
 	const { user, logout } = useAuth();
 
 	return (
 		<nav className="navbar">
-			<h1 className="navbar-brand">
-				<img src={ecommerceIcon} alt="Marketplace" className="brand-icon" />
-				Marketplace
-			</h1>
+			<h1 className="navbar-brand">Community Marketplace</h1>
 			<ul className="nav-links">
 				<li className="nav-item">
 					<button className="nav-link nav-button theme-toggle" onClick={onToggleTheme} title="Toggle light/dark theme">

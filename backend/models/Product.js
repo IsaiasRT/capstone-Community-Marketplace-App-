@@ -3,15 +3,26 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true
+		required: [true, 'Name is required'],
+		trim: true
 	},
-	description: String,
+	description: {
+		type: String,
+		trim: true
+	},
 	price: {
 		type: Number,
-		required: true
+		required: [true, 'Price is required'],
+		min: [0, 'Price cannot be negative']
 	},
-	category: String,
-	imageUrl: String, // Directly store image URL
+	category: {
+		type: String,
+		trim: true
+	},
+	imageUrl: {
+		type: String,
+		trim: true
+	}, // Directly store image URL
 	owner: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',

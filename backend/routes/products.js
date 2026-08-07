@@ -28,12 +28,28 @@ router.get('/mine', protect, async (req, res, next) => {
 router.post('/', protect, async (req, res, next) => {
 	try {
 		const { name, description, price, category, imageUrl } = req.body;
+		const trimmed = {};
+		trimmed.name = typeof name === 'string' ? name.trim() : name;
+		trimmed.description = typeof description === 'string' ? description.trim() : description;
+		trimmed.category = typeof category === 'string' ? category.trim() : category;
+		trimmed.imageUrl = typeof imageUrl === 'string' ? imageUrl.trim() : imageUrl;
+
+		if (!trimmed.name) {
+			return res.status(400).json({ message: 'Name is required' });
+		}
+		if (price === undefined || price === null || price === '') {
+			return res.status(400).json({ message: 'Price is required' });
+		}
+		if (Number(price) < 0) {
+			return res.status(400).json({ message: 'Price cannot be negative' });
+		}
+
 		const newProduct = new Product({
-			name,
-			description,
-			price,
-			category,
-			imageUrl,
+			name: trimmed.name,
+			description: trimmed.description,
+			price: Number(price),
+			category: trimmed.category,
+			imageUrl: trimmed.imageUrl,
 			owner: req.user._id,
 		});
 		const savedProduct = await newProduct.save();
@@ -55,9 +71,22 @@ router.put('/:id', protect, async (req, res, next) => {
 		if (product.owner.toString() !== req.user._id.toString()) {
 			return res.status(403).json({ message: 'Not authorized to edit this product' });
 		}
+		const trimmed = {};
+		trimmed.name = typeof name === 'string' ? name.trim() : name;
+		trimmed.description = typeof description === 'string' ? description.trim() : description;
+		trimmed.category = typeof category === 'string' ? category.trim() : category;
+		trimmed.imageUrl = typeof imageUrl === 'string' ? imageUrl.trim() : imageUrl;
+
+		if (trimmed.name !== undefined && !trimmed.name) {
+			return res.status(400).json({ message: 'Name cannot be empty' });
+		}
+		if (price !== undefined && price !== null && price !== '' && Number(price) < 0) {
+			return res.status(400).json({ message: 'Price cannot be negative' });
+		}
+
 		const updatedProduct = await Product.findByIdAndUpdate(
 			req.params.id,
-			{ name, description, price, category, imageUrl },
+			{ name: trimmed.name, description: trimmed.description, price: price === undefined ? price : Number(price), category: trimmed.category, imageUrl: trimmed.imageUrl },
 			{ new: true, runValidators: true }
 		);
 		res.json(updatedProduct);
