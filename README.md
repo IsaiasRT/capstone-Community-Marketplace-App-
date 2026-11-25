@@ -126,9 +126,6 @@ node server.js
 - https://csszengarden.com/220/
 - https://www.reddit.com/r/webdev/comments/13r52gk/mern_stack_authentication_without_jwt/
 - https://www.dafont.com/online-market.font
-# Scrum 
-
-https://capstone-community-market-app.atlassian.net/jira/software/projects/SCRUM/boards/1?filter=&groupBy=none
 
 # Netlify 
 
